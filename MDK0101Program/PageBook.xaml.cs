@@ -31,7 +31,7 @@ namespace MDK0101Program
             CB2.ItemsSource = Base.dataBase.Autor.ToList(); 
             CB2.SelectedValuePath = "ID_Autor";
             CB2.DisplayMemberPath = "First_name";
-            CB2.SelectedIndex = 0;
+            CB2.SelectedIndex = 4;
 
         }
 
@@ -52,13 +52,13 @@ namespace MDK0101Program
         {
             filter = book.book.ToList();
 
-            if (CB2.SelectedIndex == 0)
+            if (CB2.SelectedIndex == 4)
             {
                 filter = filter;
             }
             else
             {
-                filter = filter.Where(x => x.ID_Autor == CB2.SelectedIndex).ToList();
+                filter = filter.Where(x => x.ID_Autor == CB2.SelectedIndex +1).ToList();
             }
 
             switch (CB.SelectedIndex)
