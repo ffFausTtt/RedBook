@@ -38,7 +38,15 @@
             </Border.Effect>
             <StackPanel>
                 <TextBlock Text="Список книг" FontSize="30" FontWeight="Bold" Margin="0 0 0 20" HorizontalAlignment="Center"></TextBlock>
-                    <Button Background="Plum" Margin="0 0 0 20"  HorizontalAlignment="Center" Content="Назад" Click="BackBtn_AMenu" Height="30"></Button>
+                    
+                <Button Background="Plum" Margin="0 0 0 20"  HorizontalAlignment="Center" Content="Назад" Click="BackBtn_AMenu" Height="30"></Button>
+                    <TextBox x:Name="TB" TextChanged="Filter"></TextBox>
+                    <ComboBox x:Name="CB" SelectionChanged="Filter" >
+                        <TextBlock Text="По убыыванию наименования"></TextBlock>
+                        <TextBlock Text="По возрастанию наименования"></TextBlock>
+                    </ComboBox>
+                    <ComboBox x:Name="CB2" SelectionChanged="Filter"></ComboBox>
+
                     <Grid Margin="0 0 0 20">
                     
                         <ListView x:Name="LVBook" ItemTemplate="{StaticResource LVBook}" ></ListView>

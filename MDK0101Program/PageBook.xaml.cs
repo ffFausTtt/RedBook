@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +23,16 @@ namespace MDK0101Program
     public partial class PageBook : Page
     {
         Book book = new Book();
-        
+        List<Books> filter;
         public PageBook()
         {
             InitializeComponent();
             LVBook.ItemsSource = book.book.ToList();
+            CB2.ItemsSource = Base.dataBase.Autor.ToList(); 
+            CB2.SelectedValuePath = "ID_Autor";
+            CB2.DisplayMemberPath = "First_name";
+            CB2.SelectedIndex = 0;
+
         }
 
         private void BackBtn_AMenu(object sender, RoutedEventArgs e)
@@ -42,5 +48,36 @@ namespace MDK0101Program
             new WinRedDob(bookRed).ShowDialog();
 
         }
+        private void Filter(object sender, RoutedEventArgs e)
+        {
+            filter = book.book.ToList();
+
+            if (CB2.SelectedIndex == 0)
+            {
+                filter = filter;
+            }
+            else
+            {
+                filter = filter.Where(x => x.ID_Autor == CB2.SelectedIndex).ToList();
+            }
+
+            switch (CB.SelectedIndex)
+            {
+                case 0:
+                    filter = filter.OrderBy(x => x.Title_Book).ToList();
+                    break;
+                case 1:
+                    filter = filter.OrderBy(x => x.Title_Book).ToList();
+                    filter.Reverse();
+                    break;
+            }
+
+            if (TB.Text != "")
+            {
+                filter = filter.Where(x => x.Title_Book.Contains(TB.Text)).ToList();
+            }
+            LVBook.ItemsSource = filter;
+        }
+
     }
 }
